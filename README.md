@@ -75,8 +75,9 @@ Running it through Relax AI means:
 
 | | Anthropic (direct) | Relax AI (via SmithPorts) |
 |---|---|---|
-| **Opus** | $15/1M input, $75/1M output | £1.17/1M input, £2.33/1M output |
-| **Sonnet** | $3/1M input, $15/1M output | £0.15/1M input, £0.80/1M output |
+| **Opus** | $5/1M input, $25/1M output | £1.17/1M input, £2.33/1M output |
+| **Sonnet** | $3/1M input, $15/1M output | £1.17/1M input, £2.33/1M output |
+| **Haiku** | $1/1M input, $5/1M output | £0.15/1M input, £0.80/1M output |
 | **Infrastructure** | US-hosted | UK sovereign (Civo LON1) |
 | **Data residency** | US | UK only |
 
