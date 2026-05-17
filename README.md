@@ -18,8 +18,6 @@ First run sets up the `r-claude` shorthand, prompts for your [Relax API key](htt
 | Sonnet | DeepSeek-V4-Pro | Same model, tuned for balanced quality/speed. |
 | Haiku | Llama-4-Maverick-17B-128E | Fast, multimodal, 500K context. |
 
-**Don't have a Relax API key?** [Get one via SmithPorts](https://smithports.co.uk) — we provision keys for UK businesses on sovereign infrastructure.
-
 Or clone and run manually:
 
 ```bash
@@ -27,6 +25,42 @@ git clone https://github.com/Luke-J-Jimenez/relax-claude.git
 cd relax-claude
 ./relax-claude.sh
 ```
+
+## Getting a Relax API Key
+
+You'll need a free Relax AI account and API key. Takes about 60 seconds.
+
+### Step 1: Create your Relax AI account
+
+Go to [relax.ai](https://relax.ai) and click **Get Started** (top right). Sign up with your email. The free plan gives you 20 interactions per day — enough to try Claude Code on sovereign infra without committing to anything.
+
+### Step 2: Generate an API key
+
+Once logged in, go to **Settings → API Keys** (or visit [dashboard.relax.ai/settings/apikey](https://dashboard.relax.ai/settings/apikey) directly).
+
+Click **Create API Key**, give it a name (e.g. "claude-code"), and copy the key. It'll look like `rak_...`.
+
+### Step 3: Run relax-claude
+
+Back in your terminal:
+
+```bash
+relax-claude
+```
+
+When prompted, paste your API key. That's it — you'll never need to enter it again.
+
+The key is stored securely in your macOS Keychain (`security add-generic-password`) or in `~/.relax-claude-key` on Linux. It never leaves your machine.
+
+### Step 4: Start coding
+
+```bash
+r-claude "explain this codebase to me"
+```
+
+Claude Code is now running through UK sovereign AI infrastructure, at a fraction of Anthropic's pricing. Your code and prompts never leave the UK.
+
+**Need help?** Email luke@smithports.co.uk
 
 ## Why This Exists
 
@@ -109,7 +143,7 @@ tput cnorm    # or just run: reset
 ## Requirements
 
 - [Claude Code](https://code.claude.com) (`npm install -g @anthropic-ai/claude-code`)
-- A [Relax AI](https://relax.ai) API key
+- A [Relax AI](https://relax.ai) API key — follow the [Getting a Relax API Key](#getting-a-relax-api-key) guide above
 - bash, curl
 - [jq](https://jqlang.github.io/jq/) (optional, improves model list parsing)
 - [Docker](https://www.docker.com/products/docker-desktop/) (optional, for container mode)
