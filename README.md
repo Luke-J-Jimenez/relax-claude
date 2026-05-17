@@ -1,22 +1,52 @@
-# relax-claude
+# Claude Code on Relax AI — via SmithPorts
 
-Run [Claude Code](https://code.claude.com) through [Relax AI](https://relax.ai). One script, self-installs on first run.
+Run [Claude Code](https://code.claude.com) through [Relax AI](https://relax.ai) — UK sovereign AI infrastructure. One script, self-installs on first run. Up to 80% cheaper than Anthropic API pricing.
+
+Brought to you by [SmithPorts](https://smithports.co.uk) — The UK AI Infrastructure Lab. Certified Relax AI partner. Deployed on Civo LON1.
 
 ## Install
 
 ```bash
-mkdir -p ~/.local/bin && curl -fsSL https://raw.githubusercontent.com/jmesout/relax-claude/main/relax-claude.sh -o ~/.local/bin/relax-claude && chmod +x ~/.local/bin/relax-claude && ~/.local/bin/relax-claude
+mkdir -p ~/.local/bin && curl -fsSL https://raw.githubusercontent.com/Luke-J-Jimenez/relax-claude/main/relax-claude.sh -o ~/.local/bin/relax-claude && chmod +x ~/.local/bin/relax-claude && ~/.local/bin/relax-claude
 ```
 
-First run sets up the `r-claude` shorthand, prompts for your [Relax API key](https://dashboard.relax.ai/settings/apikey), and lets you pick models.
+First run sets up the `r-claude` shorthand, prompts for your [Relax API key](https://dashboard.relax.ai/settings/apikey), and pre-selects recommended models:
+
+| Claude Code tier | Recommended model | Why |
+|-----------------|-------------------|-----|
+| Opus | DeepSeek-V4-Pro | Frontier MoE. Reasoning, coding, long-context agentic. 1M token context. |
+| Sonnet | DeepSeek-V4-Pro | Same model, tuned for balanced quality/speed. |
+| Haiku | Llama-4-Maverick-17B-128E | Fast, multimodal, 500K context. |
+
+**Don't have a Relax API key?** [Get one via SmithPorts](https://smithports.co.uk) — we provision keys for UK businesses on sovereign infrastructure.
 
 Or clone and run manually:
 
 ```bash
-git clone https://github.com/jmesout/relax-claude.git
+git clone https://github.com/Luke-J-Jimenez/relax-claude.git
 cd relax-claude
 ./relax-claude.sh
 ```
+
+## Why This Exists
+
+Claude Code is the best AI coding agent. But using it through Anthropic directly means:
+- Your code and prompts leave the UK (US-hosted inference)
+- You pay Anthropic API pricing ($15-75/1M tokens)
+
+Running it through Relax AI means:
+- UK sovereign inference (Civo LON1 data centre)
+- Up to 80% cheaper than Anthropic API pricing
+- Same Claude Code experience — same features, same quality
+
+| | Anthropic (direct) | Relax AI (via SmithPorts) |
+|---|---|---|
+| **Opus** | $15/1M input, $75/1M output | £1.17/1M input, £2.33/1M output |
+| **Sonnet** | $3/1M input, $15/1M output | £0.15/1M input, £0.80/1M output |
+| **Infrastructure** | US-hosted | UK sovereign (Civo LON1) |
+| **Data residency** | US | UK only |
+
+*Prices are approximate. Check [Relax AI](https://relax.ai) for current pricing.*
 
 ## Usage
 
@@ -83,3 +113,7 @@ tput cnorm    # or just run: reset
 - bash, curl
 - [jq](https://jqlang.github.io/jq/) (optional, improves model list parsing)
 - [Docker](https://www.docker.com/products/docker-desktop/) (optional, for container mode)
+
+---
+
+[SmithPorts](https://smithports.co.uk) — AI agents and interfaces shipped in 14 days on UK sovereign infrastructure. Fixed price from £2,500. Source code yours.

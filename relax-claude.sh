@@ -1,4 +1,13 @@
 #!/usr/bin/env bash
+# =============================================================================
+# relax-claude — Run Claude Code through Relax AI (UK sovereign infrastructure)
+#
+# SmithPorts — The UK AI Infrastructure Lab
+# https://smithports.co.uk
+#
+# One script, self-installs on first run. Up to 80% cheaper than Anthropic API.
+# Certified Relax AI partner. Deployed on Civo LON1.
+# =============================================================================
 
 SCRIPT_PATH="$(cd "$(dirname "$0")" && pwd)/$(basename "$0")"
 # Resolve symlinks to the real script path (portable: works on macOS + Linux)
@@ -430,18 +439,37 @@ select_models() {
 
   for alias in opus sonnet haiku; do
     case "$alias" in
-      opus)   desc="most capable, best for complex tasks" ;;
-      sonnet) desc="good balance of quality and speed (recommended)" ;;
-      haiku)  desc="fastest responses, best for simple tasks" ;;
+      opus)   desc="most capable, best for complex tasks"
+              recommended="DeepSeek-V4-Pro" ;;
+      sonnet) desc="good balance of quality and speed (recommended)"
+              recommended="DeepSeek-V4-Pro" ;;
+      haiku)  desc="fastest responses, best for simple tasks"
+              recommended="Llama-4-Maverick-17B-128E" ;;
     esac
-    pick_option "Select model for '${alias}' ${DIM}(${desc})${RST}:" "${models[@]}"
-    if [ $PICK_RESULT -ge 0 ]; then
-      echo "${alias}=${models[$PICK_RESULT]}" >> "$tmp_config"
-      msg_ok "${alias} -> ${models[$PICK_RESULT]}"
+
+    # Try to auto-select the recommended SmithPorts model
+    local auto_idx=-1
+    for i in "${!models[@]}"; do
+      if [ "${models[$i]}" = "$recommended" ]; then
+        auto_idx=$i
+        break
+      fi
+    done
+
+    if [ $auto_idx -ge 0 ]; then
+      echo "${alias}=${models[$auto_idx]}" >> "$tmp_config"
+      msg_ok "${alias} -> ${models[$auto_idx]} ${DIM}(recommended)${RST}"
       echo ""
     else
-      msg_warn "${alias} skipped"
-      echo ""
+      pick_option "Select model for '${alias}' ${DIM}(${desc})${RST}:" "${models[@]}"
+      if [ $PICK_RESULT -ge 0 ]; then
+        echo "${alias}=${models[$PICK_RESULT]}" >> "$tmp_config"
+        msg_ok "${alias} -> ${models[$PICK_RESULT]}"
+        echo ""
+      else
+        msg_warn "${alias} skipped"
+        echo ""
+      fi
     fi
   done
 
